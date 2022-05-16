@@ -52,8 +52,8 @@ const News = (props) => {
     // }
 
     const fetchMoreData = async () => {
-        
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.ApiKey}&page=${page+1}&pageSize=${props.pageSize}`;
+
+        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.ApiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
         // setloading( true );
         setpage(page + 1)
         let data = await fetch(url);
@@ -66,7 +66,7 @@ const News = (props) => {
 
     return (
         <>
-            <h1 className='text-center' style={{ margin: '30px', marginTop: '85px'}}>NewsApp - Top {capitalizeFirstLetter(props.category)} Headlines</h1>
+            <h1 className='text-center' style={{ margin: '30px', marginTop: '85px' }}>NewsApp - Top {capitalizeFirstLetter(props.category)} Headlines</h1>
             {loading && <Spinner />}
 
             <InfiniteScroll
@@ -79,9 +79,16 @@ const News = (props) => {
                     <div className="row">
                         {articles.map((element) => {
                             return <div className="col-md-4" key={element.url}>
-                                <NewsItems title={!element.title ? "" : element.title} author={element.author} date={element.publishedAt}
-                                    description={element.description ? element.description : ""} imageUrl={element.urlToImage}
-                                    newsUrl={element.url} source={element.source.name} />
+                                <NewsItems
+                                    key={element.url}
+                                    title={!element.title ? "" : element.title}
+                                    author={element.author}
+                                    date={element.publishedAt}
+                                    description={element.description ? element.description : ""}
+                                    imageUrl={element.urlToImage}
+                                    newsUrl={element.url}
+                                    source={element.source.name}
+                                />
                             </div>
                         })}
                     </div>
